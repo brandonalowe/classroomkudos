@@ -17,6 +17,17 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "images.classroomkudos.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
 };
 
 export default config;

@@ -1,15 +1,11 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import Image from "next/image";
+
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
-
-import { httpBatchLink } from "@trpc/client";
-
 import { api } from "@/utils/api";
 
-export default function Home() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
+export default function Class() {
   return (
     <>
       <Head>
@@ -20,7 +16,7 @@ export default function Home() {
         <div className="flex-col md:flex ">
           <div className="border-b border-violet-400">
             <div className="flex h-16 items-center px-4">
-              <div className="flex grow-[1] justify-start">
+              <div className="flex w-1/3">
                 <Link href="/">
                   <Image
                     src="/angry-goose.png"
@@ -30,7 +26,7 @@ export default function Home() {
                   />
                 </Link>
               </div>
-              <div className="flex grow-[2] justify-evenly px-4 text-2xl text-violet-300">
+              <div className="flex w-1/3 justify-center px-4 text-2xl text-violet-300">
                 <Link href="/demo">
                   <div className="rounded-md px-5 py-3 font-semibold tracking-tight hover:bg-white/20">
                     Demo
@@ -52,24 +48,19 @@ export default function Home() {
                   </div>
                 </Link>
               </div>
-              <div className="flex grow-[1] justify-end">
+              <div className="flex w-1/3 justify-end">
                 <AuthShowcase />
               </div>
             </div>
           </div>
         </div>
-
-        <div className="flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            <span className="text-[hsl(280,100%,70%)]">Currently in dev</span>
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8"></div>
+        <div className="flex flex-col gap-[18px] p-[24px] text-2xl text-violet-300">
+          <h1>to be built</h1>
         </div>
       </main>
     </>
   );
 }
-
 function AuthShowcase() {
   const { data: sessionData } = useSession();
 
