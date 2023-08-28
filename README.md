@@ -2,7 +2,7 @@
 
 This is a webapp I built for my partner to help assist with behaviour management inside her year 3 classroom.
 
-I am currently in the middle of rebuilding the app from a JavaScript implementation to TypeScript.
+I am currently in the middle of rebuilding the app into a typesafe implementation.
 
 ## Techstack
 
