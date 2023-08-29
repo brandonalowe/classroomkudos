@@ -10,7 +10,7 @@ export default function StudentDetail() {
   return (
     <>
       <Toaster position="bottom-right" />
-      {/* <Header /> */}
+      <Header />
       {/* <Navbar /> */}
       <StudentList />
       <AddStudent />
