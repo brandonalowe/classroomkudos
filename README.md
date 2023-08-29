@@ -15,7 +15,8 @@ I am currently in the middle of rebuilding the app into a typesafe implementatio
 
 Currently a work in progress!
 
-- [x] Demo app
+- [x] Demo app functioning
+- [ ] Flesh out demo app
 - [ ] Authentication
 - [ ] Migrate existing noSQL database $\rightarrow$ SQL
 - [ ] Rebuild WebApp portion
