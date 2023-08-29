@@ -78,7 +78,7 @@ export const StudentBlock = (props: {
   };
 
   return (
-    <html>
+    <>
       <div className="pt-20">
         <Dialog>
           <DialogTrigger className="b-0 relative mx-4 mb-3 h-16 w-24 items-center rounded-md bg-zinc-900 p-0 text-base shadow-sm ">
@@ -216,6 +216,6 @@ export const StudentBlock = (props: {
           </DialogContent>
         </Dialog>
       </div>
-    </html>
+    </>
   );
 };

@@ -17,7 +17,7 @@ export const Header = () => {
   return (
     <main className="text-neutral-300">
       <div className="flex-col md:flex">
-        <div className="border-b border-zinc-500">
+        <div className="border-b border-violet-300">
           <div className="flex h-16 items-center px-4">
             <div className="flex w-1/4">
               <Link href="/">← Home</Link>
@@ -37,8 +37,8 @@ export const Header = () => {
             <div className="flex w-1/4 justify-end">
               <div className="relative mr-0 box-border flex w-full flex-nowrap items-center justify-end place-self-end self-stretch">
                 <Select>
-                  <SelectTrigger className="w-1/2 rounded-xl border-2 border-zinc-600 bg-transparent px-4 py-2 placeholder:text-zinc-500">
-                    <SelectValue placeholder="Sort by" />
+                  <SelectTrigger className="w-1/2 rounded-xl border-2 border-zinc-600 bg-transparent px-4 py-2 placeholder:text-zinc-500 overflow-hidden">
+                    <SelectValue placeholder="Sort" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>

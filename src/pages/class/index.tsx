@@ -26,7 +26,7 @@ export default function Class() {
                   />
                 </Link>
               </div>
-              <div className="flex w-1/3 justify-center px-4 text-2xl text-violet-300">
+              <div className="flex w-1/3 justify-center px-4 text-2xl">
                 <Link href="/demo">
                   <div className="rounded-md px-5 py-3 font-semibold tracking-tight hover:bg-white/20">
                     Demo
@@ -54,7 +54,7 @@ export default function Class() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-[18px] p-[24px] text-2xl text-violet-300">
+        <div className="flex flex-col gap-[18px] p-[24px] text-2xl">
           <h1>to be built</h1>
         </div>
       </main>
@@ -71,12 +71,12 @@ function AuthShowcase() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <p className="text-center text-sm text-violet-200">
+      <p className="text-center text-sm">
         {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
         {secretMessage && <span> - {secretMessage}</span>}
       </p>
       <button
-        className="rounded-full bg-white/10 px-6 py-3 font-semibold text-violet-200 no-underline transition hover:bg-white/20"
+        className="rounded-full bg-white/10 px-6 py-3 font-semibold no-underline transition hover:bg-white/20"
         onClick={sessionData ? () => void signOut() : () => void signIn()}
       >
         {sessionData ? "Sign out" : "Sign in"}

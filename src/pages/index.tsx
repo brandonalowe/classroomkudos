@@ -18,7 +18,7 @@ export default function Home() {
       </Head>
       <main className="h-screen">
         <div className="flex-col md:flex ">
-          <div className="border-b border-violet-400">
+          <div className="border-b border-violet-300">
             <div className="flex h-16 items-center px-4">
               <div className="flex grow-[1] justify-start">
                 <Link href="/">
@@ -30,7 +30,7 @@ export default function Home() {
                   />
                 </Link>
               </div>
-              <div className="flex grow-[2] justify-evenly px-4 text-2xl text-violet-300">
+              <div className="flex grow-[2] justify-evenly px-4 text-2xl">
                 <Link href="/demo">
                   <div className="rounded-md px-5 py-3 font-semibold tracking-tight hover:bg-white/20">
                     Demo
@@ -60,8 +60,8 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            <span className="text-[hsl(280,100%,70%)]">Currently in dev</span>
+          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
+            <span className="">Currently in dev</span>
           </h1>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8"></div>
         </div>
@@ -85,7 +85,7 @@ function AuthShowcase() {
         {secretMessage && <span> - {secretMessage}</span>}
       </p>
       <button
-        className="rounded-full bg-white/10 px-6 py-3 font-semibold text-violet-200 no-underline transition hover:bg-white/20"
+        className="rounded-full bg-white/10 px-6 py-3 font-semibold no-underline transition hover:bg-white/20"
         onClick={sessionData ? () => void signOut() : () => void signIn()}
       >
         {sessionData ? "Sign out" : "Sign in"}
