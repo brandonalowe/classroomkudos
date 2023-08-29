@@ -6,7 +6,7 @@ import tempImg from "../../public/eggs/egg0.png";
 
 // import { cn } from "@/lib/utils";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -14,10 +14,6 @@ import Image from "next/image";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import {
@@ -79,143 +75,140 @@ export const StudentBlock = (props: {
 
   return (
     <>
-      <div className="pt-20">
-        <Dialog>
-          <DialogTrigger className="b-0 relative mx-4 mb-3 h-16 w-24 items-center rounded-md bg-zinc-900 p-0 text-base shadow-sm ">
-            {/* Changing the colour of the text based on points */}
-            <div className="-mt-20">
-              <div className="relative mx-auto flex h-full w-full justify-center">
-                <Image
-                  src={tempImg}
-                  alt="student image"
-                  height={80}
-                  width={70}
-                  className="text-center"
-                  priority
-                />
-              </div>
+      <Dialog>
+        <DialogTrigger className="b-0 relative mx-5 mb-3 mt-14 h-20 w-28 items-center rounded-md bg-zinc-900 p-0 text-base shadow-sm ">
+          {/* Changing the colour of the text based on points */}
+          <div className="-mt-20">
+            <div className="relative mx-auto flex h-full w-full justify-center">
+              <Image
+                src={tempImg}
+                alt="student image"
+                height={80}
+                width={70}
+                className="text-center"
+                priority
+              />
             </div>
-            <div className="-mb-2 box-border px-1 py-0">
-              <motion.span className="flex-wrap text-base">
-                {student.name}
-              </motion.span>
-              <div className="flex justify-between gap-5 text-white">
-                {student.points === 0 ? (
-                  <></>
-                ) : (
-                  <div className="absolute left-full top-0 flex -translate-x-1/2 -translate-y-4 flex-col gap-1">
-                    {student.points > 0 ? (
-                      <span className="inline-block min-h-[2.5rem] min-w-[2.5rem] rounded-full border-2 border-solid border-white bg-green-700 p-1 text-center text-lg font-bold shadow-sm">
-                        {student.points}
-                      </span>
-                    ) : (
-                      <span className="inline-block min-h-[2.5rem] min-w-[2.5rem] rounded-full border-2 border-solid border-white bg-red-700 p-1 text-center text-lg font-bold shadow-sm">
-                        {student.points}
-                      </span>
-                    )}
+          </div>
+          <div className="-mb-2 box-border pl-[5px] pr-[3px]">
+            <motion.span className="flex-wrap text-base">
+              {student.name}
+            </motion.span>
+            <div className="flex justify-between gap-5 text-white">
+              {student.points === 0 ? (
+                <></>
+              ) : (
+                <div className="absolute left-full top-0 flex -translate-x-1/2 -translate-y-4 flex-col gap-1">
+                  {student.points > 0 ? (
+                    <span className="inline-block min-h-[2.5rem] min-w-[2.5rem] rounded-full border-2 border-solid border-white bg-green-700 p-1 text-center text-lg font-bold shadow-sm">
+                      {student.points}
+                    </span>
+                  ) : (
+                    <span className="inline-block min-h-[2.5rem] min-w-[2.5rem] rounded-full border-2 border-solid border-white bg-red-700 p-1 text-center text-lg font-bold shadow-sm">
+                      {student.points}
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[600px]">
+          <Tabs defaultValue="praise" className="mt-4 w-[550px]">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="praise">Praise Points</TabsTrigger>
+              <TabsTrigger value="edit">Edit</TabsTrigger>
+            </TabsList>
+            <TabsContent value="praise">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-center">
+                    Give Praise Points to {student.name}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="relative max-h-[90%] max-w-[90%] space-y-2">
+                  <div className="flex space-y-1">
+                    <div className="min-h-full w-1/3 grow-0">
+                      <Image
+                        src={tempImg}
+                        alt="Student Character"
+                        width={125}
+                        height={150}
+                      />
+                    </div>
+                    <div className="flex h-full w-2/3 justify-center gap-3">
+                      {rewards.map((reward) => (
+                        <DialogPrimitive.Close key={reward._id}>
+                          <button
+                            onClick={() =>
+                              handleStudentPointUpdate(
+                                student._id,
+                                reward.weight
+                              )
+                            }
+                            className="relative flex h-24 w-24 items-end justify-center gap-4 rounded-[24px] bg-neutral-200 px-3 py-4 shadow-sm"
+                          >
+                            <div>{reward.name}</div>
+                          </button>
+                        </DialogPrimitive.Close>
+                      ))}
+                    </div>
                   </div>
-                )}
-              </div>
-            </div>
-          </DialogTrigger>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="edit">
+              <Card>
+                <CardHeader>
+                  <CardTitle>{student.name}</CardTitle>
+                  <CardDescription>
+                    Change {student.name}&apos;s name, delete {student.name}, or
+                    reassign points here.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <div className="space-y-1">
+                    <Label htmlFor="current">Current name</Label>
+                    <Input
+                      id="current"
+                      type="text"
+                      defaultValue={student.name}
+                      onChange={(e) => setEditingStudentName(e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="new">Current Points</Label>
+                    <Input
+                      id="new"
+                      type="number"
+                      defaultValue={student.points}
+                      onChange={(e) =>
+                        setEditingStudentPoints(e.target.valueAsNumber)
+                      }
+                    />
+                  </div>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                  <DialogPrimitive.Close>
+                    <Button onClick={() => handleStudentUpdate(student._id)}>
+                      Save changes
+                    </Button>
+                  </DialogPrimitive.Close>
 
-          <DialogContent className="sm:max-w-[600px]">
-            <Tabs defaultValue="praise" className="mt-4 w-[550px]">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="praise">Praise Points</TabsTrigger>
-                <TabsTrigger value="edit">Edit</TabsTrigger>
-              </TabsList>
-              <TabsContent value="praise">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-center">
-                      Give Praise Points to {student.name}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="relative max-h-[90%] max-w-[90%] space-y-2">
-                    <div className="flex space-y-1">
-                      <div className="min-h-full w-1/3 grow-0">
-                        <Image
-                          src={tempImg}
-                          alt="Student Character"
-                          width={125}
-                          height={150}
-                        />
-                      </div>
-                      <div className="flex h-full w-2/3 justify-center gap-3">
-                        {rewards.map((reward) => (
-                          <DialogPrimitive.Close key={reward._id}>
-                            <button
-                              onClick={() =>
-                                handleStudentPointUpdate(
-                                  student._id,
-                                  reward.weight
-                                )
-                              }
-                              className="relative flex h-24 w-24 items-end justify-center gap-4 rounded-[24px] bg-neutral-200 px-3 py-4 shadow-sm"
-                            >
-                              <div>{reward.name}</div>
-                            </button>
-                          </DialogPrimitive.Close>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              <TabsContent value="edit">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{student.name}</CardTitle>
-                    <CardDescription>
-                      Change {student.name}&apos;s name, delete {student.name},
-                      or reassign points here.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-2">
-                    <div className="space-y-1">
-                      <Label htmlFor="current">Current name</Label>
-                      <Input
-                        id="current"
-                        type="text"
-                        defaultValue={student.name}
-                        onChange={(e) => setEditingStudentName(e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <Label htmlFor="new">Current Points</Label>
-                      <Input
-                        id="new"
-                        type="number"
-                        defaultValue={student.points}
-                        onChange={(e) =>
-                          setEditingStudentPoints(e.target.valueAsNumber)
-                        }
-                      />
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-between">
-                    <DialogPrimitive.Close>
-                      <Button onClick={() => handleStudentUpdate(student._id)}>
-                        Save changes
-                      </Button>
-                    </DialogPrimitive.Close>
-
-                    <DialogPrimitive.Close>
-                      <Button
-                        className="bg-red-600"
-                        onClick={() => handleStudentDelete(student._id)}
-                      >
-                        Delete Student
-                      </Button>
-                    </DialogPrimitive.Close>
-                  </CardFooter>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </DialogContent>
-        </Dialog>
-      </div>
+                  <DialogPrimitive.Close>
+                    <Button
+                      className="bg-red-600"
+                      onClick={() => handleStudentDelete(student._id)}
+                    >
+                      Delete Student
+                    </Button>
+                  </DialogPrimitive.Close>
+                </CardFooter>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
