@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 
+import { useSorting } from "@/context/useSorting"
+
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -14,6 +16,9 @@ import {
 export const Header = () => {
   const [input, setInput] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const { updateSorting } = useSorting();
+
   return (
     <main className="text-neutral-300">
       <div className="flex-col md:flex">
@@ -36,8 +41,8 @@ export const Header = () => {
             </div>
             <div className="flex w-1/4 justify-end">
               <div className="relative mr-0 box-border flex w-full flex-nowrap items-center justify-end place-self-end self-stretch">
-                <Select>
-                  <SelectTrigger className="w-1/2 rounded-xl border-2 border-zinc-600 bg-transparent px-4 py-2 placeholder:text-zinc-500 overflow-hidden">
+                <Select onValueChange={(value) => updateSorting(value)}>
+                  <SelectTrigger className="w-1/2 overflow-hidden rounded-xl border-2 border-zinc-600 bg-transparent px-4 py-2 placeholder:text-zinc-500">
                     <SelectValue placeholder="Sort" />
                   </SelectTrigger>
                   <SelectContent>
@@ -47,13 +52,6 @@ export const Header = () => {
                       <SelectItem value="highPoints">Highest</SelectItem>
                       <SelectItem value="lowPoints">Lowest</SelectItem>
                     </SelectGroup>
-                    {/* <Select.Separator className={styles.SelectSeparator}>
-                        <Select.Group>
-                          <SelectItem value="favourites">
-                            Favourite Kids
-                          </SelectItem>
-                        </Select.Group>
-                      </Select.Separator> */}
                   </SelectContent>
                 </Select>
               </div>

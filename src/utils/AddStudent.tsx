@@ -1,23 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
 import { useStudent } from "@/context/useStudent";
 import { Input } from "@/components/ui/input";
 
-
-
-//   interface Reward {
-//     _id: string;
-//     name: string;
-//     weight: number;
-//     classId: string;
-//     influence: number;
-//     img: string;
-//   }
-
 export const AddStudent = () => {
   const [input, setInput] = useState<string>("");
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const { addStudent } = useStudent();
 
@@ -32,21 +21,20 @@ export const AddStudent = () => {
     }
   };
 
- 
   return (
     <form onSubmit={handleSubmission}>
-      <div className="flex items-center w-full max-w-lg gap-2 p-5 m-auto">
+      <div className="m-auto flex w-full max-w-lg items-center gap-2 p-5">
         <Input
           ref={inputRef}
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           type="text"
-          className="w-full px-5 py-2 bg-transparent border-2 outline-none border-zinc-600 rounded-xl placeholder:text-zinc-500 focus:border-white"
+          className="w-full rounded-xl border-2 border-zinc-600 bg-transparent px-5 py-2 outline-none placeholder:text-zinc-500 focus:border-white"
           placeholder="start typing ..."
         />
         <button
           type="submit"
-          className="px-5 py-2 text-sm font-normal text-blue-300 bg-blue-900 border-2 border-blue-900 active:scale-95 rounded-xl"
+          className="rounded-xl border-2 border-blue-900 bg-blue-900 px-5 py-2 text-sm font-normal text-blue-300 active:scale-95"
         >
           Submit
         </button>

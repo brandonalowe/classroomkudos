@@ -1,28 +1,18 @@
+import type { Student } from "@/context/StudentContext";
 import { useStudent } from "@/context/useStudent";
-import { useReward } from "@/context/useReward";
+import { useSorting } from "@/context/useSorting";
+
+import { WholeClassRewardDialog } from "@/utils/WholeClassRewardDialog";
 import { StudentBlock } from "./StudentBlock";
 
 import { SiStarship } from "react-icons/si";
 import { motion } from "framer-motion";
-import toast from "react-hot-toast";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 
 export const StudentList = () => {
-  const { students, updateStudent } = useStudent();
-  const { rewards } = useReward();
+  const { students } = useStudent();
+  const { sorting } = useSorting();
 
   const calcPoints = () => {
     let total = 0;
@@ -32,13 +22,40 @@ export const StudentList = () => {
     return total;
   };
 
-  const handleWholeClassPointUpdate = (weight: number) => {
-    students.forEach((student) => {
-      updateStudent(student._id, weight)
-    })
-    toast.success("All praise points allocated");
-
-  }
+  const sortArray: (sortingType: string) => Student[] = function (sortingType: string): Student[] {
+    switch(sortingType) {
+      case "alpha":
+        return students.sort((a: Student, b: Student) =>{
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        });
+      case "reverseAlpha":
+        return students.sort((a, b) => {
+          if (a.name < b.name) {
+            return 1;
+          }
+          if (a.name > b.name) {
+            return -1;
+          }
+          return 0;
+        });
+      case "highPoints":
+        return students.sort((a, b) => {
+          return b.points - a.points;
+        });
+      case "lowPoints":
+        return students.sort((a, b) => {
+          return a.points - b.points;
+        });
+      default:
+        return students
+    }
+  };
 
   if (!students.length) {
     return (
@@ -56,7 +73,7 @@ export const StudentList = () => {
   return (
     <motion.ul className="flex min-h-min w-full origin-top flex-wrap content-center">
       <Dialog>
-        <DialogTrigger className="b-0 relative mx-5 mb-3 mt-14 h-20 w-28 items-center rounded-md bg-zinc-900 p-0 text-base shadow-sm hover:bg-zinc-600 hover:border-2 hover:border-zinc-300">
+        <DialogTrigger className="b-0 relative mx-5 mb-3 mt-14 h-20 w-28 items-center rounded-md bg-zinc-900 p-0 text-base shadow-sm hover:border-2 hover:border-zinc-300 hover:bg-zinc-600">
           {/* Changing the colour of the text based on points */}
           <div className="mb-1 box-border px-1 py-0">
             <motion.span className="flex-nowrap text-base">
@@ -81,46 +98,11 @@ export const StudentList = () => {
             </div>
           </div>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[600px]">
-          <Tabs defaultValue="praise" className="mt-4 w-[550px]">
-            <TabsList className="grid w-full grid-cols-1">
-              <TabsTrigger value="praise">Praise Points</TabsTrigger>
-            </TabsList>
-            <TabsContent value="praise">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-center">
-                    Give Praise Points to whole class
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="relative max-h-[90%] max-w-full space-y-2">
-                  <div className="flex space-y-1 justify-center">
-                    <div className="flex h-full justify-evenly gap-3">
-                      {rewards.map((reward) => (
-                        <DialogPrimitive.Close key={reward._id}>
-                          <button
-                            onClick={() =>
-                              handleWholeClassPointUpdate(
-                                reward.weight
-                              )
-                            }
-                            className="relative flex h-24 w-24 items-end justify-center gap-4 rounded-[24px] bg-neutral-200 px-3 py-4 shadow-sm"
-                          >
-                            <div>{reward.name}</div>
-                          </button>
-                        </DialogPrimitive.Close>
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </DialogContent>
+        <WholeClassRewardDialog />
       </Dialog>
 
-      {students.map((student) => (
-        <StudentBlock student={student} rewards={rewards} key={student._id} />
+      {sortArray(sorting).map((student) => (
+        <StudentBlock student={student} key={student._id} />
       ))}
     </motion.ul>
   );
