@@ -1,7 +1,6 @@
 import type { Student } from "@/context/StudentContext";
 import { useStudent } from "@/context/useStudent";
 import { useSorting } from "@/context/useSorting";
-
 import { WholeClassRewardDialog } from "@/utils/WholeClassRewardDialog";
 import { StudentBlock } from "./StudentBlock";
 
@@ -23,9 +22,10 @@ export const StudentList = () => {
   };
 
   const sortArray: (sortingType: string) => Student[] = function (sortingType: string): Student[] {
+    const sortedStudents = students
     switch(sortingType) {
       case "alpha":
-        return students.sort((a: Student, b: Student) =>{
+        return  sortedStudents.sort((a: Student, b: Student) =>{
           if (a.name < b.name) {
             return -1;
           }
@@ -35,7 +35,7 @@ export const StudentList = () => {
           return 0;
         });
       case "reverseAlpha":
-        return students.sort((a, b) => {
+        return sortedStudents.sort((a, b) => {
           if (a.name < b.name) {
             return 1;
           }
@@ -45,15 +45,15 @@ export const StudentList = () => {
           return 0;
         });
       case "highPoints":
-        return students.sort((a, b) => {
+        return sortedStudents.sort((a, b) => {
           return b.points - a.points;
         });
       case "lowPoints":
-        return students.sort((a, b) => {
+        return sortedStudents.sort((a, b) => {
           return a.points - b.points;
         });
       default:
-        return students
+        return sortedStudents
     }
   };
 

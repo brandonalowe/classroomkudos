@@ -1,5 +1,5 @@
 import type { Student } from "@/context/StudentContext";
-import { useStudent } from "../context/useStudent";
+import { useStudent } from "@/context/useStudent";
 
 import toast from "react-hot-toast";
 import { useState } from "react";
@@ -12,7 +12,7 @@ export const Navbar = () => {
   const { students, updateStudent } = useStudent();
 
   const [randomStudent, setRandomStudent] = useState<Student | undefined>(
-    undefined
+    students[0]
   );
 
   const handleRandomStudent = () => {
@@ -49,12 +49,11 @@ export const Navbar = () => {
                   Random
                 </DialogTrigger>
                 {randomStudent !== undefined ? (
-                  <RewardDialog
-                    student={randomStudent}
-                    random={true}
-                  />
+                  <RewardDialog student={randomStudent} random={true} />
                 ) : (
-                  toast.error("Whoops! Looks like your random student isn't there!")
+                  toast.error(
+                    "Whoops! Looks like your random student isn't there!"
+                  )
                 )}
               </Dialog>
               <button

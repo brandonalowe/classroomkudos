@@ -1,10 +1,10 @@
 import { Toaster } from "react-hot-toast";
+import Head from "next/head";
 
 import { Header } from "@/utils/Header";
 import { Navbar } from "@/utils/Navbar";
 import { StudentList } from "@/utils/StudentList";
 import { AddStudent } from "@/utils/AddStudent";
-import Head from "next/head";
 
 export default function StudentDetail() {
   return (
