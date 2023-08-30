@@ -1,7 +1,6 @@
 import type { Student } from "../context/StudentContext";
 import { useStudent } from "../context/useStudent";
 import type { Reward } from "../context/RewardContext";
-import { useReward } from "../context/useReward";
 import tempImg from "../../public/eggs/egg0.png";
 
 // import { cn } from "@/lib/utils";
@@ -41,7 +40,6 @@ export const StudentBlock = (props: {
   const [editingStudentPoints, setEditingStudentPoints] = useState<number>(-69);
 
   const { deleteStudent, editStudent, updateStudent } = useStudent();
-  //   const { deleteReward, editReward, updateReward } = useReward();
 
   const handleStudentUpdate = (studentId: string) => {
     if (editingStudentName.trim() !== "" && editingStudentPoints !== -69) {
@@ -76,7 +74,7 @@ export const StudentBlock = (props: {
   return (
     <>
       <Dialog>
-        <DialogTrigger className="b-0 relative mx-5 mb-3 mt-14 h-20 w-28 items-center rounded-md bg-zinc-900 p-0 text-base shadow-sm ">
+        <DialogTrigger className="b-0 relative mx-5 mb-3 mt-14 h-20 w-28 items-center rounded-md bg-zinc-900 p-0 text-base shadow-sm hover:bg-zinc-600 hover:border-2 hover:border-zinc-300">
           {/* Changing the colour of the text based on points */}
           <div className="-mt-20">
             <div className="relative mx-auto flex h-full w-full justify-center">

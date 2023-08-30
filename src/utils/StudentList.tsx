@@ -56,7 +56,7 @@ export const StudentList = () => {
   return (
     <motion.ul className="flex min-h-min w-full origin-top flex-wrap content-center">
       <Dialog>
-        <DialogTrigger className="b-0 relative mx-5 mb-3 mt-14 h-20 w-28 items-center rounded-md bg-zinc-900 p-0 text-base shadow-sm ">
+        <DialogTrigger className="b-0 relative mx-5 mb-3 mt-14 h-20 w-28 items-center rounded-md bg-zinc-900 p-0 text-base shadow-sm hover:bg-zinc-600 hover:border-2 hover:border-zinc-300">
           {/* Changing the colour of the text based on points */}
           <div className="mb-1 box-border px-1 py-0">
             <motion.span className="flex-nowrap text-base">
