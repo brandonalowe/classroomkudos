@@ -1,14 +1,25 @@
+import type { Student } from "@/context/StudentContext";
 import { useStudent } from "../context/useStudent";
 
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { RewardDialog } from "./RewardDialog";
 
 export const Navbar = () => {
   const { students, updateStudent } = useStudent();
 
+  const [randomStudent, setRandomStudent] = useState<Student | undefined>(
+    undefined
+  );
+
+  const handleRandomStudent = () => {
+    setRandomStudent(students[Math.floor(Math.random() * students.length)]);
+  };
+
   const handleReset = () => {
-    console.log(students)
     students.forEach((student) => {
       updateStudent(student._id, -student.points);
     });
@@ -30,12 +41,22 @@ export const Navbar = () => {
               >
                 Timer
               </button>
-              <button
-                className="group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:bg-neutral-500 disabled:bg-transparent"
-                disabled
-              >
-                Random
-              </button>
+              <Dialog>
+                <DialogTrigger
+                  className="group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:bg-neutral-500 disabled:bg-transparent"
+                  onClick={() => handleRandomStudent()}
+                >
+                  Random
+                </DialogTrigger>
+                {randomStudent !== undefined ? (
+                  <RewardDialog
+                    student={randomStudent}
+                    random={true}
+                  />
+                ) : (
+                  toast.error("Whoops! Looks like your random student isn't there!")
+                )}
+              </Dialog>
               <button
                 className="group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:bg-neutral-500 disabled:bg-transparent"
                 onClick={() => handleReset()}
