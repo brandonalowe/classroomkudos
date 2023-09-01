@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 
-import { useSorting } from "@/context/useSorting"
+import { useSorting } from "@/context/useSorting";
 
 import { Input } from "@/components/ui/input";
 import {
@@ -14,10 +14,9 @@ import {
 } from "@/components/ui/select";
 
 export const Header = () => {
-  const [input, setInput] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const { searchString, updateSorting, updateSearchString } = useSorting();
 
-  const { updateSorting } = useSorting();
 
   return (
     <main className="text-neutral-300">
@@ -31,8 +30,8 @@ export const Header = () => {
               <div className="m-auto flex w-full max-w-lg items-center gap-1 p-1">
                 <Input
                   ref={inputRef}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
+                  value={searchString}
+                  onChange={(e) => updateSearchString(e.target.value)}
                   type="text"
                   className="w-full rounded-xl border-2 border-zinc-600 bg-transparent px-5 py-2 outline-none placeholder:text-neutral-300 focus:border-white"
                   placeholder="Search for ..."

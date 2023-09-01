@@ -11,7 +11,7 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 
 export const StudentList = () => {
   const { students } = useStudent();
-  const { sorting } = useSorting();
+  const { sorting, searchString } = useSorting();
 
   const calcPoints = () => {
     let total = 0;
@@ -101,7 +101,7 @@ export const StudentList = () => {
         <WholeClassRewardDialog />
       </Dialog>
 
-      {sortArray(sorting).map((student) => (
+      {sortArray(sorting).filter((student) => student.name.toLowerCase().includes(searchString.toLowerCase())).map((student) => (
         <StudentBlock student={student} key={student._id} />
       ))}
     </motion.ul>
