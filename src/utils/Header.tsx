@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 
 import { useSorting } from "@/context/useSorting";
 

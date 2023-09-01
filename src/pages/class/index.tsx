@@ -16,7 +16,7 @@ export default function Class() {
         <div className="flex-col md:flex ">
           <div className="border-b border-violet-400">
             <div className="flex h-16 items-center px-4">
-              <div className="flex w-1/3">
+            <div className="flex grow-0 justify-start">
                 <Link href="/">
                   <Image
                     src="/angry-goose.png"
@@ -26,7 +26,7 @@ export default function Class() {
                   />
                 </Link>
               </div>
-              <div className="flex w-1/3 justify-center px-4 text-2xl">
+              <div className="flex grow-[1] justify-center px-4 text-2xl">
                 <Link href="/demo">
                   <div className="rounded-md px-5 py-3 font-semibold tracking-tight hover:bg-white/20">
                     Demo
@@ -48,9 +48,9 @@ export default function Class() {
                   </div>
                 </Link>
               </div>
-              <div className="flex w-1/3 justify-end">
+              {/* <div className="flex grow-[1] justify-end">
                 <AuthShowcase />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -61,26 +61,26 @@ export default function Class() {
     </>
   );
 }
-function AuthShowcase() {
-  const { data: sessionData } = useSession();
+// function AuthShowcase() {
+//   const { data: sessionData } = useSession();
 
-  const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
+//   const { data: secretMessage } = api.example.getSecretMessage.useQuery(
+//     undefined, // no input
+//     { enabled: sessionData?.user !== undefined }
+//   );
 
-  return (
-    <div className="flex flex-col items-center justify-center">
-      <p className="text-center text-sm">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
-      </p>
-      <button
-        className="rounded-full bg-white/10 px-6 py-3 font-semibold no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => void signOut() : () => void signIn()}
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
-    </div>
-  );
-}
+//   return (
+//     <div className="flex flex-col items-center justify-center">
+//       <p className="text-center text-sm">
+//         {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
+//         {secretMessage && <span> - {secretMessage}</span>}
+//       </p>
+//       <button
+//         className="rounded-full bg-white/10 px-6 py-3 font-semibold no-underline transition hover:bg-white/20"
+//         onClick={sessionData ? () => void signOut() : () => void signIn()}
+//       >
+//         {sessionData ? "Sign out" : "Sign in"}
+//       </button>
+//     </div>
+//   );
+// }
