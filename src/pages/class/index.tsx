@@ -1,86 +1,34 @@
-import { signIn, signOut, useSession } from "next-auth/react";
-
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
+import { Header } from "@/utils/class/Header";
+import { AdminNavbar } from "@/utils/class/AdminNavbar";
+import { ClassList } from "@/utils/class/ClassList";
+import { AddClass } from "@/utils/class/AddClass";
 import { api } from "@/utils/api";
 
-export default function Class() {
+import { Toaster } from "react-hot-toast";
+import Head from "next/head";
+
+export default function StudentDetail() {
+  const { data } = api.class.getAll.useQuery();
+
   return (
     <>
       <Head>
-        <title>Classroom Kudos</title>
+        <title>Classes</title>
         <link rel="png" href="/favicon.ico" />
       </Head>
-      <main className="h-screen">
-        <div className="flex-col md:flex ">
-          <div className="border-b border-violet-400">
-            <div className="flex h-16 items-center px-4">
-            <div className="flex grow-0 justify-start">
-                <Link href="/">
-                  <Image
-                    src="/angry-goose.png"
-                    width={36}
-                    height={36}
-                    alt="Angry goose"
-                  />
-                </Link>
-              </div>
-              <div className="flex grow-[1] justify-center px-4 text-2xl">
-                <Link href="/demo">
-                  <div className="rounded-md px-5 py-3 font-semibold tracking-tight hover:bg-white/20">
-                    Demo
-                  </div>
-                </Link>
-                <Link href="/class">
-                  <div className="rounded-md px-5 py-3 font-semibold tracking-tight hover:bg-white/20">
-                    Class
-                  </div>
-                </Link>
-                <Link href="/about">
-                  <div className="rounded-md px-5 py-3 font-semibold tracking-tight hover:bg-white/20">
-                    About
-                  </div>
-                </Link>
-                <Link href="/help">
-                  <div className="rounded-md px-5 py-3 font-semibold tracking-tight hover:bg-white/20">
-                    Help
-                  </div>
-                </Link>
-              </div>
-              {/* <div className="flex grow-[1] justify-end">
-                <AuthShowcase />
-              </div> */}
-            </div>
-          </div>
+      <Toaster position="bottom-right" />
+      <Header />
+      <div className="border-b">
+        <div className="container flex-1 items-start md:grid md:gap-6 md:grid-cols-[180px_minmax(0,1fr)] lg:gap-10">
+          <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block">
+            <AdminNavbar />
+          </aside>
+          <main className="relative py-6 lg:gap-10 lg:py-8">
+            <ClassList />
+          </main>
         </div>
-        <div className="flex flex-col gap-[18px] p-[24px] text-2xl">
-          <h1>to be built</h1>
-        </div>
-      </main>
+      </div>
+      <AddClass />
     </>
   );
 }
-// function AuthShowcase() {
-//   const { data: sessionData } = useSession();
-
-//   const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-//     undefined, // no input
-//     { enabled: sessionData?.user !== undefined }
-//   );
-
-//   return (
-//     <div className="flex flex-col items-center justify-center">
-//       <p className="text-center text-sm">
-//         {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-//         {secretMessage && <span> - {secretMessage}</span>}
-//       </p>
-//       <button
-//         className="rounded-full bg-white/10 px-6 py-3 font-semibold no-underline transition hover:bg-white/20"
-//         onClick={sessionData ? () => void signOut() : () => void signIn()}
-//       >
-//         {sessionData ? "Sign out" : "Sign in"}
-//       </button>
-//     </div>
-//   );
-// }

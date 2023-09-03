@@ -1,8 +1,9 @@
 import type { Student } from "@/context/StudentContext";
 import { useStudent } from "@/context/useStudent";
 import { useSorting } from "@/context/useSorting";
-import { WholeClassRewardDialog } from "@/utils/WholeClassRewardDialog";
-import { StudentBlock } from "./StudentBlock";
+
+import { WholeClassRewardDialog } from "@/utils/demo/WholeClassRewardDialog";
+import { StudentBlock } from "@/utils/demo/StudentBlock";
 
 import { SiStarship } from "react-icons/si";
 import { motion } from "framer-motion";

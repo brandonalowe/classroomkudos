@@ -1,5 +1,7 @@
-import type { Student } from "../context/StudentContext";
-import tempImg from "../../public/eggs/egg0.png";
+import type { Student } from "@/context/StudentContext";
+import tempImg from "../../../public/eggs/egg0.png";
+
+import { RewardDialog } from "@/utils/demo/RewardDialog";
 
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -8,7 +10,6 @@ import {
   Dialog,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { RewardDialog } from "./RewardDialog";
 
 export const StudentBlock = (props: {
   student: Student;

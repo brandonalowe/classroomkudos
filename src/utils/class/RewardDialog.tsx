@@ -1,6 +1,8 @@
 import type { Student } from "@/context/StudentContext";
 import { useStudent } from "@/context/useStudent";
-import tempImg from "../../public/eggs/egg0.png";
+import { useReward } from "@/context/useReward";
+
+import tempImg from "../../../public/eggs/egg0.png";
 
 import Image from "next/image";
 import { useState } from "react";
@@ -21,7 +23,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { useReward } from "@/context/useReward";
 
 export const RewardDialog = (props: { student: Student; random: boolean }) => {
   const { student, random } = props;

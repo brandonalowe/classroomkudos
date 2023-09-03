@@ -1,14 +1,15 @@
 import type { Student } from "@/context/StudentContext";
 import { useStudent } from "@/context/useStudent";
 
+import { RewardDialog } from "@/utils/demo/RewardDialog";
+
 import toast from "react-hot-toast";
 import { useState } from "react";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import { RewardDialog } from "./RewardDialog";
 
-export const Navbar = () => {
+export const AdminNavbar = () => {
   const { students, updateStudent } = useStudent();
 
   const [randomStudent, setRandomStudent] = useState<Student | undefined>(
@@ -32,9 +33,9 @@ export const Navbar = () => {
         <div className="w-full">
           <div className="pb-4">
             <h4 className="mb-1 rounded-md px-2 py-1 text-lg font-semibold">
-              Tools
+              This is the admin navbar
             </h4>
-            <div className="grid grid-flow-row auto-rows-max text-sm">
+            {/* <div className="grid grid-flow-row auto-rows-max text-sm">
               <button
                 className="group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:bg-neutral-500 disabled:bg-transparent"
                 disabled
@@ -62,7 +63,7 @@ export const Navbar = () => {
               >
                 Reset Points
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
